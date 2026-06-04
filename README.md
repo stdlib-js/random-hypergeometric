@@ -35,20 +35,32 @@ limitations under the License.
 
 > Generate pseudorandom numbers drawn from a [hypergeometric][@stdlib/random/base/hypergeometric] distribution.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/random-hypergeometric
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import hypergeometric from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@deno/mod.js';
-```
-
-You can also import the following named exports from the package:
-
-```javascript
-import { factory } from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@deno/mod.js';
+var hypergeometric = require( '@stdlib/random-hypergeometric' );
 ```
 
 #### hypergeometric( shape, N, K, n\[, options] )
@@ -71,8 +83,8 @@ The function has the following parameters:
 When provided scalar distribution parameters, every element in the output [ndarray][@stdlib/ndarray/ctor] is drawn from the same distribution. To generate pseudorandom numbers drawn from different distributions, provide distribution parameter arguments as [ndarrays][@stdlib/ndarray/ctor]. The following example demonstrates broadcasting an [ndarray][@stdlib/ndarray/ctor] containing distribution parameters to generate sub-matrices drawn from different distributions.
 
 ```javascript
-import getShape from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-shape@deno/mod.js';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@deno/mod.js';
+var getShape = require( '@stdlib/ndarray-shape' );
+var array = require( '@stdlib/ndarray-array' );
 
 var N = array( [ [ [ 20 ] ], [ [ 50 ] ] ] );
 // returns <ndarray>
@@ -93,7 +105,7 @@ var arr = hypergeometric( [ 2, 3, 3 ], N, K, n );
 If provided an empty shape, the function returns a zero-dimensional [ndarray][@stdlib/ndarray/ctor].
 
 ```javascript
-import getShape from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-shape@deno/mod.js';
+var getShape = require( '@stdlib/ndarray-shape' );
 
 var arr = hypergeometric( [], 20, 10, 7 );
 // returns <ndarray>
@@ -107,7 +119,7 @@ var v = arr.get();
 
 The function accepts the following options:
 
--   **dtype**: output ndarray data type. Must be a real-valued or "generic" [data type][@stdlib/ndarray/dtypes].
+-   **dtype**: output ndarray data type. Must be a real or "generic" [data type][@stdlib/ndarray/dtypes].
 -   **order**: ndarray order (i.e., memory layout), which is either `row-major` (C-style) or `column-major` (Fortran-style). Default: `'row-major'`.
 -   **mode**: specifies how to handle indices which exceed ndarray dimensions. For a list of supported modes, see [`ndarray`][@stdlib/ndarray/ctor]. Default: `'throw'`.
 -   **submode**: a mode array which specifies for each dimension how to handle subscripts which exceed ndarray dimensions. If provided fewer modes than dimensions, an [ndarray][@stdlib/ndarray/ctor] instance recycles modes using modulo arithmetic. Default: `[ options.mode ]`.
@@ -116,7 +128,7 @@ The function accepts the following options:
 By default, the function returns an [ndarray][@stdlib/ndarray/ctor] having a [data type][@stdlib/ndarray/dtypes] determined by the function's output data type [policy][@stdlib/ndarray/output-dtype-policies]. To override the default behavior, set the `dtype` option.
 
 ```javascript
-import getDType from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-dtype@deno/mod.js';
+var getDType = require( '@stdlib/ndarray-dtype' );
 
 var opts = {
     'dtype': 'generic'
@@ -134,7 +146,7 @@ var dt = String( getDType( arr ) );
 Fills an [ndarray][@stdlib/ndarray/ctor] with pseudorandom numbers drawn from a [hypergeometric][@stdlib/random/base/hypergeometric] distribution.
 
 ```javascript
-import zeros from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-zeros@deno/mod.js';
+var zeros = require( '@stdlib/ndarray-zeros' );
 
 var out = zeros( [ 3, 3 ] );
 // returns <ndarray>
@@ -158,7 +170,7 @@ The method has the following parameters:
 Returns a function for generating pseudorandom numbers drawn from a [hypergeometric][@stdlib/random/base/hypergeometric] distribution.
 
 ```javascript
-import getShape from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-shape@deno/mod.js';
+var getShape = require( '@stdlib/ndarray-shape' );
 
 var random = hypergeometric.factory();
 
@@ -179,7 +191,7 @@ The method accepts the following options:
 To use a custom PRNG as the underlying source of uniformly distributed pseudorandom numbers, set the `prng` option.
 
 ```javascript
-import minstd from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd@deno/mod.js';
+var minstd = require( '@stdlib/random-base-minstd' );
 
 var opts = {
     'prng': minstd.normalized
@@ -225,7 +237,7 @@ var seed = hypergeometric.seed;
 If the `factory` method is provided a PRNG for uniformly distributed numbers, the associated property value on the returned function is `null`.
 
 ```javascript
-var minstd = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd-shuffle' ).normalized;
+var minstd = require( '@stdlib/random-base-minstd-shuffle' ).normalized;
 
 var random = hypergeometric.factory({
     'prng': minstd
@@ -247,7 +259,7 @@ var len = hypergeometric.seedLength;
 If the `factory` method is provided a PRNG for uniformly distributed numbers, the associated property value on the returned function is `null`.
 
 ```javascript
-var minstd = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd-shuffle' ).normalized;
+var minstd = require( '@stdlib/random-base-minstd-shuffle' ).normalized;
 
 var random = hypergeometric.factory({
     'prng': minstd
@@ -269,7 +281,7 @@ var state = hypergeometric.state;
 If the `factory` method is provided a PRNG for uniformly distributed numbers, the associated property value on the returned function is `null`.
 
 ```javascript
-var minstd = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd-shuffle' ).normalized;
+var minstd = require( '@stdlib/random-base-minstd-shuffle' ).normalized;
 
 var random = hypergeometric.factory({
     'prng': minstd
@@ -291,7 +303,7 @@ var len = hypergeometric.stateLength;
 If the `factory` method is provided a PRNG for uniformly distributed numbers, the associated property value on the returned function is `null`.
 
 ```javascript
-var minstd = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd-shuffle' ).normalized;
+var minstd = require( '@stdlib/random-base-minstd-shuffle' ).normalized;
 
 var random = hypergeometric.factory({
     'prng': minstd
@@ -313,7 +325,7 @@ var sz = hypergeometric.byteLength;
 If the `factory` method is provided a PRNG for uniformly distributed numbers, the associated property value on the returned function is `null`.
 
 ```javascript
-var minstd = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-minstd-shuffle' ).normalized;
+var minstd = require( '@stdlib/random-base-minstd-shuffle' ).normalized;
 
 var random = hypergeometric.factory({
     'prng': minstd
@@ -333,7 +345,7 @@ var sz = random.byteLength;
 
 -   If PRNG state is "shared" (meaning a state array was provided during function creation and **not** copied) and one sets the underlying generator state to a state array having a different length, the function returned by the `factory` method does **not** update the existing shared state and, instead, points to the newly provided state array. In order to synchronize the output of the underlying generator according to the new shared state array, the state array for **each** relevant creation function and/or PRNG must be **explicitly** set.
 -   If PRNG state is "shared" and one sets the underlying generator state to a state array of the same length, the PRNG state is updated (along with the state of all other creation functions and/or PRNGs sharing the PRNG's state array).
--   The output data type [policy][@stdlib/ndarray/output-dtype-policies] only applies to the main function and specifies that, by default, the function must return an [ndarray][@stdlib/ndarray/ctor] having a real-valued or "generic" [data type][@stdlib/ndarray/dtypes]. For the `assign` method, the output [ndarray][@stdlib/ndarray/ctor] is allowed to have any supported output [data type][@stdlib/ndarray/dtypes].
+-   The output data type [policy][@stdlib/ndarray/output-dtype-policies] only applies to the main function and specifies that, by default, the function must return an [ndarray][@stdlib/ndarray/ctor] having a real or "generic" [data type][@stdlib/ndarray/dtypes]. For the `assign` method, the output [ndarray][@stdlib/ndarray/ctor] is allowed to have any supported output [data type][@stdlib/ndarray/dtypes].
 
 </section>
 
@@ -346,9 +358,9 @@ var sz = random.byteLength;
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-import logEach from 'https://cdn.jsdelivr.net/gh/stdlib-js/console-log-each@deno/mod.js';
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@deno/mod.js';
-import hypergeometric from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@deno/mod.js';
+var logEach = require( '@stdlib/console-log-each' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var hypergeometric = require( '@stdlib/random-hypergeometric' );
 
 // Create a function for generating random arrays originating from the same state:
 var random = hypergeometric.factory({
@@ -409,7 +421,7 @@ logEach( '%f, %f, %f', arr[ 0 ], arr[ 1 ], arr[ 2 ] );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -472,21 +484,21 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/random-hypergeometric/main/LICENSE
 
-[@stdlib/random/base/hypergeometric]: https://github.com/stdlib-js/random-base-hypergeometric/tree/deno
+[@stdlib/random/base/hypergeometric]: https://github.com/stdlib-js/random-base-hypergeometric
 
-[@stdlib/array/uint32]: https://github.com/stdlib-js/array-uint32/tree/deno
+[@stdlib/array/uint32]: https://github.com/stdlib-js/array-uint32
 
-[@stdlib/ndarray/dtypes]: https://github.com/stdlib-js/ndarray-dtypes/tree/deno
+[@stdlib/ndarray/dtypes]: https://github.com/stdlib-js/ndarray-dtypes
 
-[@stdlib/ndarray/output-dtype-policies]: https://github.com/stdlib-js/ndarray-output-dtype-policies/tree/deno
+[@stdlib/ndarray/output-dtype-policies]: https://github.com/stdlib-js/ndarray-output-dtype-policies
 
-[@stdlib/ndarray/ctor]: https://github.com/stdlib-js/ndarray-ctor/tree/deno
+[@stdlib/ndarray/ctor]: https://github.com/stdlib-js/ndarray-ctor
 
-[@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes/tree/deno
+[@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes
 
 <!-- <related-links> -->
 
-[@stdlib/random/array/hypergeometric]: https://github.com/stdlib-js/random-array-hypergeometric/tree/deno
+[@stdlib/random/array/hypergeometric]: https://github.com/stdlib-js/random-array-hypergeometric
 
 <!-- </related-links> -->
 
