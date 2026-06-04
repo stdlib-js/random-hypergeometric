@@ -35,38 +35,32 @@ limitations under the License.
 
 > Generate pseudorandom numbers drawn from a [hypergeometric][@stdlib/random/base/hypergeometric] distribution.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/random-hypergeometric
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-hypergeometric = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var hypergeometric = require( 'path/to/vendor/umd/random-hypergeometric/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.hypergeometric;
-})();
-</script>
+var hypergeometric = require( '@stdlib/random-hypergeometric' );
 ```
 
 #### hypergeometric( shape, N, K, n\[, options] )
@@ -125,7 +119,7 @@ var v = arr.get();
 
 The function accepts the following options:
 
--   **dtype**: output ndarray data type. Must be a real-valued or "generic" [data type][@stdlib/ndarray/dtypes].
+-   **dtype**: output ndarray data type. Must be a real or "generic" [data type][@stdlib/ndarray/dtypes].
 -   **order**: ndarray order (i.e., memory layout), which is either `row-major` (C-style) or `column-major` (Fortran-style). Default: `'row-major'`.
 -   **mode**: specifies how to handle indices which exceed ndarray dimensions. For a list of supported modes, see [`ndarray`][@stdlib/ndarray/ctor]. Default: `'throw'`.
 -   **submode**: a mode array which specifies for each dimension how to handle subscripts which exceed ndarray dimensions. If provided fewer modes than dimensions, an [ndarray][@stdlib/ndarray/ctor] instance recycles modes using modulo arithmetic. Default: `[ options.mode ]`.
@@ -351,7 +345,7 @@ var sz = random.byteLength;
 
 -   If PRNG state is "shared" (meaning a state array was provided during function creation and **not** copied) and one sets the underlying generator state to a state array having a different length, the function returned by the `factory` method does **not** update the existing shared state and, instead, points to the newly provided state array. In order to synchronize the output of the underlying generator according to the new shared state array, the state array for **each** relevant creation function and/or PRNG must be **explicitly** set.
 -   If PRNG state is "shared" and one sets the underlying generator state to a state array of the same length, the PRNG state is updated (along with the state of all other creation functions and/or PRNGs sharing the PRNG's state array).
--   The output data type [policy][@stdlib/ndarray/output-dtype-policies] only applies to the main function and specifies that, by default, the function must return an [ndarray][@stdlib/ndarray/ctor] having a real-valued or "generic" [data type][@stdlib/ndarray/dtypes]. For the `assign` method, the output [ndarray][@stdlib/ndarray/ctor] is allowed to have any supported output [data type][@stdlib/ndarray/dtypes].
+-   The output data type [policy][@stdlib/ndarray/output-dtype-policies] only applies to the main function and specifies that, by default, the function must return an [ndarray][@stdlib/ndarray/ctor] having a real or "generic" [data type][@stdlib/ndarray/dtypes]. For the `assign` method, the output [ndarray][@stdlib/ndarray/ctor] is allowed to have any supported output [data type][@stdlib/ndarray/dtypes].
 
 </section>
 
@@ -363,15 +357,10 @@ var sz = random.byteLength;
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/console-log-each@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-hypergeometric@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var logEach = require( '@stdlib/console-log-each' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var hypergeometric = require( '@stdlib/random-hypergeometric' );
 
 // Create a function for generating random arrays originating from the same state:
 var random = hypergeometric.factory({
@@ -402,11 +391,6 @@ var arr = ndarray2array( x4 );
 // Print the contents:
 console.log( '' );
 logEach( '%f, %f, %f', arr[ 0 ], arr[ 1 ], arr[ 2 ] );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -500,21 +484,21 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/random-hypergeometric/main/LICENSE
 
-[@stdlib/random/base/hypergeometric]: https://github.com/stdlib-js/random-base-hypergeometric/tree/umd
+[@stdlib/random/base/hypergeometric]: https://github.com/stdlib-js/random-base-hypergeometric
 
-[@stdlib/array/uint32]: https://github.com/stdlib-js/array-uint32/tree/umd
+[@stdlib/array/uint32]: https://github.com/stdlib-js/array-uint32
 
-[@stdlib/ndarray/dtypes]: https://github.com/stdlib-js/ndarray-dtypes/tree/umd
+[@stdlib/ndarray/dtypes]: https://github.com/stdlib-js/ndarray-dtypes
 
-[@stdlib/ndarray/output-dtype-policies]: https://github.com/stdlib-js/ndarray-output-dtype-policies/tree/umd
+[@stdlib/ndarray/output-dtype-policies]: https://github.com/stdlib-js/ndarray-output-dtype-policies
 
-[@stdlib/ndarray/ctor]: https://github.com/stdlib-js/ndarray-ctor/tree/umd
+[@stdlib/ndarray/ctor]: https://github.com/stdlib-js/ndarray-ctor
 
-[@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes/tree/umd
+[@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes
 
 <!-- <related-links> -->
 
-[@stdlib/random/array/hypergeometric]: https://github.com/stdlib-js/random-array-hypergeometric/tree/umd
+[@stdlib/random/array/hypergeometric]: https://github.com/stdlib-js/random-array-hypergeometric
 
 <!-- </related-links> -->
 
